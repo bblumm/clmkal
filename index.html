@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomis Cats</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            margin: 0; /* Добавлено для удаления отступов по краям */
+        }
+
+        .cat-icon {
+            font-size: 2em;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .cat-count {
+            font-size: 3em;
+            margin-bottom: 30px;
+        }
+
+        .task-container {
+            display: flex;
+            flex-direction: column; /* Изменяем на column */
+            align-items: center;
+            justify-content: center; /* Выравниваем по центру */
+            width: 100%; /* Занимает всю ширину */
+            padding: 0 20px; /* Добавляем отступы по бокам */
+        }
+
+        .task {
+            margin: 10px;
+            width: 100%;
+            max-width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .task-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .task-count {
+            font-size: 1em;
+        }
+
+        .control-panel {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background-color: #f2f2f2;
+            padding: 10px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px; /* Скругление углов */
+            z-index: 1; /* Устанавливаем индекс z больше, чтобы панель была сверху */
+        }
+
+        .control-button {
+            background-color: transparent;
+            border: none;
+            border-radius: 10px; /* Скругление углов */
+            padding: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s; /* Добавлена анимация тени */
+            display: flex;
+            flex-direction: column; /*  Изменяем направление flex */
+            align-items: center;
+            justify-content: center; 
+            width: 70px; 
+            height: 90px; /* Увеличиваем высоту */ 
+        }
+
+        .control-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тени при наведении */
+        }
+        .control-button img {
+            width: 40px; 
+            height: 40px;
+        }
+        .control-button-text {
+            font-size: 12px; /* Размер шрифта */
+            font-family: "junegull";  /*  Шрифт по умолчанию */
+            text-align: center; /* Центрирование текста */
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 768px) { 
+            .task-container {
+                /* flex-direction: column;  - Уже установлено */
+            }
+
+            .control-panel {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .control-button {
+                margin-bottom: 10px;
+                width: 100%; 
+            }
+        }
+
+        /* Стиль для контейнера с кнопками */
+        .control-buttons-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 300px; /* Максимальная ширина */
+            margin: 0 auto; /* Центрирование по горизонтали */
+        }
+        /* Шрифт по умолчанию */
+        @font-face {
+            font-family: 'junegull';
+            src: url('junegull.ttf') format('truetype'); /* Замените junegull.ttf на фактический путь к файлу */
+        }
+
+        /* Стиль для картинки карты */
+        #mapImage {
+            position: fixed;  /* Изменено на fixed */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('ДОРОЖНАЯ КАРТА.PNG'); /* Замените на ваш путь к картинке */
+            background-size: cover;
+            display: none;  /* Скрываем по умолчанию */
+            z-index: 0;  /* Устанавливаем индекс z ниже, чем панель */
+            overflow-x: auto; /* Добавлено для прокрутки вправо */
+        }
+    </style>
+</head>
+<body>
+    <div id="mapImage"></div>  <!-- Добавьте сюда div для картинки карты -->
+    <div class="container" id="content">
+        <div class="row" id="homeContent"> 
+            <div class="col-12 text-center">
+                <div class="header">
+                    <span class="cat-icon">🐈‍⬛</span>
+                    <h1>GET MORE CATS WITH NOMIS NOW!</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="catCountContent">
+            <div class="col-12">
+                <img src="https://freepngimg.com/thumb/tshirt/75137-tux-tuxedo-t-shirt-racer-penguins-linux.png" alt="tuxedo penguin" width="150" height="150" class="img-fluid mx-auto d-block">
+                <div class="cat-count">
+                    <h1>1,063 CATS</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="tasksContent">
+            <div class="col-12">
+                <h2 class="tasks-header">Tasks</h2>
+                <div class="task-container">
+                    <div class="task">
+                        <div class="task-title">Boost CATS channel</div>
+                        <div class="task-count">50 CATS</div>
+                    </div>
+                    <div class="task">
+                        <div class="task-title">Subscribe to Channel</div>
+                        <div class="task-count">100 CATS</div>
+                    </div>
+                </div>
+                <button class="btn btn-secondary">Show more tasks</button>
+            </div>
+        </div>
+        <div class="row" id="fridgeContent" style="display: none;">
+            <div class="col-12 text-center">
+                <h2>Fridge</h2>
+                <ul id="fridgeList">
+                    <li>Milk</li>
+                    <li>Eggs</li>
+                    <li>Cheese</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="control-panel">
+            <div class="control-buttons-container"> 
+                <div class="control-button" id="fridgeButton">
+                    <img src="холодос.PNG" alt="Холодильник">
+                    <div class="control-button-text">Fridge</div> 
+                </div>
+                <div class="control-button" id="homeButton">
+                    <img src="home.PNG" alt="Домой">
+                    <div class="control-button-text">Home</div> 
+                </div>
+                <div class="control-button" id="mapsButton">
+                    <img src="icebearg.PNG" alt="Друзья">
+                    <div class="control-button-text">Maps</div> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const fridgeButton = document.getElementById('fridgeButton');
+const homeButton = document.getElementById('homeButton');
+const mapsButton = document.getElementById('mapsButton'); 
+const homeContent = document.getElementById('homeContent'); 
+const catCountContent = document.getElementById('catCountContent');
+const tasksContent = document.getElementById('tasksContent'); 
+const fridgeContent = document.getElementById('fridgeContent'); 
+const mapImage = document.getElementById('mapImage');
+
+fridgeButton.addEventListener('click', () => {
+    homeContent.style.display = 'none';
+    catCountContent.style.display = 'none';
+    tasksContent.style.display = 'none'; // Скрываем Tasks на холодильнике
+    fridgeContent.style.display = 'block';
+    mapImage.style.display = 'none'; 
+});
+
+homeButton.addEventListener('click', () => {
+    homeContent.style.display = 'block';
+    catCountContent.style.display = 'block';
+    tasksContent.style.display = 'block'; // Показываем Tasks на домашнем
+    fridgeContent.style.display = 'none';
+    mapImage.style.display = 'none'; 
+});
+
+mapsButton.addEventListener('click', () => {
+    homeContent.style.display = 'none';
+    catCountContent.style.display = 'none';
+    tasksContent.style.display = 'none'; // Скрываем Tasks на карте
+    fridgeContent.style.display = 'none';
+    mapImage.style.display = 'block'; 
+});
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html> 
